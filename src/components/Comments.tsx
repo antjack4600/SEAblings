@@ -1,10 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/app/providers/AuthProvider";
+import { t } from "@/i18n/t";
+import { useLanguageStore } from "@/i18n/store";
 import type { Comment } from "@/lib/types";
 
 export default function Comments({ postId }: { postId: number }) {
   const { user } = useAuth();
+  const { lang } = useLanguageStore();
+  const m = t(lang);
   const [comments, setComments] = useState<Comment[]>([]);
   const [text, setText] = useState("");
   const [msg, setMsg] = useState("");
@@ -21,7 +25,7 @@ export default function Comments({ postId }: { postId: number }) {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!user) {
-      setMsg("Sign in to comment.");
+      setMsg(m.signInToComment);
       return;
     }
     try {
@@ -70,7 +74,7 @@ export default function Comments({ postId }: { postId: number }) {
           </button>
         </form>
       ) : (
-        <div className="text-xs text-foreground/50">Sign in to comment.</div>
+        <div className="text-xs text-foreground/50">{m.signInToComment}</div>
       )}
       {msg && <p className="text-xs text-gold">{msg}</p>}
     </div>

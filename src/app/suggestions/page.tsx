@@ -1,6 +1,9 @@
 // src/app/suggestions/page.tsx — Anthony's personal suggestion intake (v1)
 "use client";
 import { useState } from "react";
+import { t } from "@/i18n/t";
+import { useLanguageStore } from "@/i18n/store";
+import LanguageSwitcher from "@/i18n/LanguageSwitcher";
 
 const inputClass = "w-full rounded-md border border-border bg-card px-3 py-2 text-foreground";
 
@@ -33,9 +36,12 @@ export default function SuggestionsPage() {
   return (
     <main className="min-h-full flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
-        <div className="flex items-center gap-3 mb-2">
-          <img src="/ASEANAppLogoimage.png" alt="SEAblings Only" className="w-8 h-8" />
-          <h1 className="text-2xl font-bold text-foreground">Suggest to SEAblings Only</h1>
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-3">
+            <img src="/ASEANAppLogoimage.png" alt="SEAblings Only" className="w-8 h-8" />
+            <h1 className="text-2xl font-bold text-foreground">Suggest to SEAblings Only</h1>
+          </div>
+          <LanguageSwitcher />
         </div>
         <p className="text-sm text-foreground/60 mb-4">Suggest a topic, video, or event — Anthony reviews and approves them.</p>
         <form onSubmit={onSubmit} className="flex flex-col gap-3">

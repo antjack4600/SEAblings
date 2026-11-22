@@ -28,6 +28,20 @@ export function getDb(): Database.Database {
         email TEXT UNIQUE,
         display_name TEXT
       );
+      CREATE TABLE IF NOT EXISTS profiles (
+        uid TEXT PRIMARY KEY,
+        username TEXT,
+        name TEXT,
+        country TEXT,
+        language TEXT,
+        gender TEXT,
+        education TEXT,
+        city TEXT,
+        date_of_birth TEXT,
+        bio TEXT,
+        created_at TEXT DEFAULT (datetime('now')),
+        updated_at TEXT DEFAULT (datetime('now'))
+      );
       CREATE TABLE IF NOT EXISTS comments (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         post_id INTEGER NOT NULL REFERENCES posts(id),
@@ -103,4 +117,53 @@ export function addSuggestion(input: Partial<Suggestion>): number {
 
 export function addUser(user: User): void {
   getDb().prepare("INSERT OR IGNORE INTO users (uid, email, display_name) VALUES (?, ?, ?)").run(user.uid, user.email, user.displayName);
+}
+
+export interface Profile {
+  uid: string;
+  username: string | null;
+  name: string | null;
+  country: string | null;
+  language: string | null;
+  gender: string | null;
+  education: string | null;
+  city: string | null;
+  date_of_birth: string | null;
+  bio: string | null;
+}
+
+export function getProfile(uid: string): Profile | null {
+  const row = getDb().prepare("SELECT * FROM profiles WHERE uid = ?").get(uid);
+  return row as Profile | null;
+}
+
+export function upsertProfile(uid: string, input: Partial<Profile>): void {
+  getDb()
+    .prepare(
+      `INSERT INTO profiles (uid, username, name, country, language, gender, education, city, date_of_birth, bio, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+       ON CONFLICT(uid) DO UPDATE SET
+         username = COALESCE(excluded.username, username),
+         name = COALESCE(excluded.name, name),
+         country = COALESCE(excluded.country, country),
+         language = COALESCE(excluded.language, language),
+         gender = COALESCE(excluded.gender, gender),
+         education = COALESCE(excluded.education, education),
+         city = COALESCE(excluded.city, city),
+         date_of_birth = COALESCE(excluded.date_of_birth, date_of_birth),
+         bio = COALESCE(excluded.bio, bio),
+         updated_at = datetime('now')`
+    )
+    .run(
+      uid,
+      input.username ?? null,
+      input.name ?? null,
+      input.country ?? null,
+      input.language ?? null,
+      input.gender ?? null,
+      input.education ?? null,
+      input.city ?? null,
+      input.date_of_birth ?? null,
+      input.bio ?? null
+    );
 }
