@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="850" viewBox="0 0 1000 850">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c9a653"/>
+      <stop offset="1" stop-color="#ad8738"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0" stop-color="#078b8b"/>
+      <stop offset="1" stop-color="#00616b"/>
+    </linearGradient>
+    <linearGradient id="hull" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#087d82"/>
+      <stop offset="1" stop-color="#00545e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sails and mast -->
+  <path d="M487 74 L487 296 L463 300 L463 104 Q463 91 475 84 Z" fill="#b99a50"/>
+  <path d="M458 158 L372 158 Q362 158 354 167 L298 224 Q294 230 303 230 L455 230 Z" fill="url(#gold)"/>
+  <path d="M450 237 L344 237 Q333 237 324 247 L252 319 Q247 326 257 326 L428 326 Q447 306 458 275 Z" fill="url(#gold)"/>
+  <path d="M489 58 C555 82 630 144 660 235 C675 279 680 321 677 360 C631 329 583 321 538 330 C501 337 465 356 425 382 C468 310 491 238 494 169 C496 125 490 85 489 58 Z" fill="url(#gold)"/>
+  <!-- narrow light edge on main sail -->
+  <path d="M489 75 C510 157 501 256 461 332" fill="none" stroke="#f1e5c4" stroke-width="8" opacity=".9"/>
+  <!-- star -->
+  <path d="M571 174 L582 204 L614 204 L588 222 L598 253 L571 234 L544 253 L554 222 L528 204 L560 204 Z" fill="#007c7b"/>
+
+  <!-- Boat cabin / forward sail base -->
+  <path d="M350 340 L468 340 L447 382 L359 382 Z" fill="#07888a"/>
+  <path d="M318 342 L422 342 L405 374 L325 374 Z" fill="#087d82"/>
+  <path d="M275 352 L386 352 L372 384 L284 384 Z" fill="#087d82"/>
+
+  <!-- Hull -->
+  <path d="M236 365 C310 389 386 405 475 405 C566 405 635 385 721 351 L656 452 Q648 466 632 466 L337 466 Q321 466 311 451 Z" fill="url(#hull)"/>
+  <path d="M236 365 C314 389 392 401 476 401 C565 401 642 381 721 351 L704 374 C632 407 561 423 476 423 C386 423 307 406 253 389 Z" fill="#087f83"/>
+  <path d="M254 389 C333 410 403 420 477 420 C558 420 626 403 704 374 L690 391 C624 421 554 438 477 438 C395 438 324 424 268 407 Z" fill="#e8f0e9"/>
+  <path d="M268 407 C336 428 406 440 477 440 C554 440 620 423 690 391 L656 445 Q649 456 633 456 L337 456 Q325 456 317 444 Z" fill="url(#teal)"/>
+  <path d="M316 451 Q473 473 637 451 L632 461 Q625 466 614 466 L340 466 Q326 466 316 451 Z" fill="#005660" opacity=".55"/>
+  <!-- bow and stern accents -->
+  <path d="M237 365 Q275 380 309 385 L320 398 Q275 390 247 380 Z" fill="#007c80"/>
+  <path d="M720 351 L692 391 L676 397 L700 365 Z" fill="#006b72"/>
+  <!-- small mast and deck details -->
+  <path d="M477 365 L484 365 L484 405 L477 405 Z" fill="#006b72"/>
+  <path d="M350 383 Q390 394 432 398" fill="none" stroke="#b7e0d9" stroke-width="4" opacity=".8"/>
+
+  <!-- Wordmark -->
+  <text x="500" y="640" text-anchor="middle" font-family="GFS Didot, Didot, 'Times New Roman', serif" font-size="139" font-weight="bold" letter-spacing="-5" fill="#071b31">SEAblings</text>
+  <text x="500" y="735" text-anchor="middle" font-family="GFS Didot, Didot, 'Times New Roman', serif" font-size="91" font-weight="bold" letter-spacing="-2" fill="#071b31">Only</text>
+</svg>

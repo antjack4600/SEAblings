@@ -1,0 +1,13 @@
+Contact: mailto:AntJack4600@gmail.com
+Policy: mailto:AntJack4600@gmail.com
+Acknowledgments: mailto:AntJack4600@gmail.com
+Expires: 2027-12-31T00:00:00Z
+Canonical: http://localhost:3101/.well-known/security.txt
+Encryption: PGP-Key: https://github.com/antjack4600.gpg
+
+We take security seriously. Please report vulnerabilities to the contact above.
+Exclusions: We accept reports on SEAblings Only, the Next.js codebase in
+Desktop/ASEAN News Feed App and their integrations with public services
+(Firebase, SQLite) and first-party web apps that we ship.
+We do not accept reports aimed at third-party services, or any other sites
+than SEAblings Only itself.

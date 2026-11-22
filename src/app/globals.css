@@ -78,3 +78,12 @@ body {
 .shader-bg {
   z-index: -1;
 }
+
+/* a11y — honor prefers-reduced-motion: the landing animations are decorative loops. */
+@media (prefers-reduced-motion: reduce) {
+  .grad-text,
+  .logo-float,
+  .enter-stagger {
+    animation: none;
+  }
+}

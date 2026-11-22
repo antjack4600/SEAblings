@@ -8,7 +8,7 @@ import { getProfile, upsertProfile, type Profile } from "@/lib/db";
 
 const PROFILE_KEYS = [
   "username", "name", "country", "language", "gender", "education", "city",
-  "date_of_birth", "bio",
+  "date_of_birth", "bio", "avatar",
 ] as const;
 
 export async function GET(req: Request) {

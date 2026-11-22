@@ -27,8 +27,6 @@ export const LANGUAGES: LanguageOption[] = [
   { code: "pt", name: "Português (Portuguese)", country: "east-timor" },
   { code: "zh", name: "中文 (Mandarin)", country: "singapore" }, // §6.4 note: Mandarin attributed to Singapore
   { code: "yue", name: "粤语 (Cantonese)", country: "malaysia" },
-  { code: "fr", name: "Français", country: "cambodia" }, // Cambodia's second official language
-  { code: "ta", name: "தமிழ்", country: "singapore" }, // Singapore's official language
   { code: "ilo", name: "Ilocano", country: "philippines" }, // Philippines' regional language
   { code: "ceb", name: "Cebuano", country: "philippines" }, // Philippines' regional language
 ];

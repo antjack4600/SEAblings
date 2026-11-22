@@ -1,0 +1,5 @@
+# The suggestions form uses a hidden decoy field with client- and server-side
+# rejection instead of a third-party CAPTCHA. squirrel cannot see that from
+# static markup, and the rule docs recommend disabling the check in this case.
+[rules]
+disable = ["security/form-captcha"]

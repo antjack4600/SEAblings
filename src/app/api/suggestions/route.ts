@@ -10,6 +10,10 @@ export async function GET() {
 export async function POST(req: Request) {
   const input = await req.json().catch(() => null);
   if (!input) return NextResponse.json({ error: "body required" }, { status: 400 });
+  // Decoy field: real visitors never fill it; bots that do get rejected here too.
+  if (typeof input.hp === "string" && input.hp.trim() !== "") {
+    return NextResponse.json({ ok: true }, { status: 201 });
+  }
   const id = addSuggestion({
     title: input.title,
     summary: input.summary,

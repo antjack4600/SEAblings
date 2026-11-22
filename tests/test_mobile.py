@@ -36,8 +36,8 @@ def test_feed_page_mobile():
         page.goto(f"{APP}/feed", wait_until="networkidle")
         page.wait_for_timeout(1500)
         assert page.get_by_role("heading", name="SEAblings Only").count() == 1
-        # language filter dropdown is present
-        assert page.get_by_label("Language").count() == 1
+        # the language switcher is present on the feed page
+        assert page.locator("#language-switcher").count() == 1
         page.screenshot(path=f"{SCREENSHOTS}/feed_mobile.png", full_page=True)
         expect_no_errors(errors)
         browser.close()
@@ -91,9 +91,8 @@ def test_language_switcher_on_feed():
         errors = page_errors(page)
         page.goto(f"{APP}/feed", wait_until="networkidle")
         page.wait_for_timeout(1200)
-        # Switcher select is the one with aria-label="Language" (the feed filter has none)
-        assert page.locator("select[aria-label='Language']").count() == 1
-        page.select_option("select[aria-label='Language']", "vi")
+        assert page.locator("#language-switcher").count() == 1
+        page.select_option("#language-switcher", "vi")
         page.wait_for_timeout(400)
         html_lang = page.evaluate("document.documentElement.lang")
         assert html_lang == "vi", f"expected <html lang='vi'>, got {html_lang!r}"
@@ -126,19 +125,14 @@ def test_language_switch_new_languages():
         errors = page_errors(page)
         page.goto(f"{APP}/settings", wait_until="networkidle")
         page.wait_for_timeout(1200)
-        # Switch to French -> <html lang="fr"> + translated labels
-        page.select_option("select[aria-label='Language']", "fr")
-        page.wait_for_timeout(400)
-        assert page.evaluate("document.documentElement.lang") == "fr"
-        assert page.get_by_text("Mode sombre").count() == 1
-        # Switch to Tamil -> <html lang="ta">
-        page.select_option("select[aria-label='Langue']", "ta")
-        page.wait_for_timeout(400)
-        assert page.evaluate("document.documentElement.lang") == "ta"
         # Switch to Ilocano -> <html lang="ilo">
-        page.select_option("select[aria-label='மொழி']", "ilo")
+        page.select_option("#language-switcher", "ilo")
         page.wait_for_timeout(400)
         assert page.evaluate("document.documentElement.lang") == "ilo"
+        # Switch to Cebuano -> <html lang="ceb">
+        page.select_option("#language-switcher", "ceb")
+        page.wait_for_timeout(400)
+        assert page.evaluate("document.documentElement.lang") == "ceb"
         expect_no_errors(errors)
         browser.close()
 
@@ -151,12 +145,15 @@ def test_feed_filter_lists_new_languages():
         page.goto(f"{APP}/feed", wait_until="networkidle")
         page.wait_for_timeout(1200)
         # The language filter lists the new languages with their country mappings.
-        for code, expected in [("fr", "cambodia"), ("ta", "singapore"), ("ilo", "philippines"), ("ceb", "philippines")]:
+        for code, expected in [("ilo", "philippines"), ("ceb", "philippines")]:
             hits = page.locator(f'select option[value="{code}"]').filter(has_text=expected)
             assert hits.count() >= 1, f"feed filter missing option {code} ({expected})"
         # The header switcher also offers the new codes.
-        for code in ["fr", "ta", "ilo", "ceb"]:
-            assert page.locator(f"select[aria-label='Language'] option[value='{code}']").count() == 1
+        for code in ["ilo", "ceb"]:
+            assert page.locator(f"#language-switcher option[value='{code}']").count() == 1
+        # Tamil and French are no longer offered.
+        assert page.locator("#language-switcher option[value='ta']").count() == 0
+        assert page.locator("#language-switcher option[value='fr']").count() == 0
         expect_no_errors(errors)
         browser.close()
 

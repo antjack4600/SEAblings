@@ -19,7 +19,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const unsub = onAuthStateChanged(auth, (u) => {
       setUser(
         u
-          ? { uid: u.uid, email: u.email, displayName: u.displayName }
+          ? { uid: u.uid, email: u.email, displayName: u.displayName, photoURL: u.photoURL ?? null }
           : null,
       );
     });

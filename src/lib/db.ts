@@ -39,6 +39,7 @@ export function getDb(): Database.Database {
         city TEXT,
         date_of_birth TEXT,
         bio TEXT,
+        avatar TEXT,
         created_at TEXT DEFAULT (datetime('now')),
         updated_at TEXT DEFAULT (datetime('now'))
       );
@@ -76,6 +77,11 @@ export function getDb(): Database.Database {
         weight REAL
       );
     `);
+    // Migration: older databases lack the avatar column.
+    const profileCols = db.prepare("PRAGMA table_info(profiles)").all() as Array<{ name: string }>;
+    if (!profileCols.some((c) => c.name === "avatar")) {
+      db.exec("ALTER TABLE profiles ADD COLUMN avatar TEXT");
+    }
   }
   return db;
 }
@@ -130,6 +136,7 @@ export interface Profile {
   city: string | null;
   date_of_birth: string | null;
   bio: string | null;
+  avatar: string | null;
 }
 
 export function getProfile(uid: string): Profile | null {
@@ -140,8 +147,8 @@ export function getProfile(uid: string): Profile | null {
 export function upsertProfile(uid: string, input: Partial<Profile>): void {
   getDb()
     .prepare(
-      `INSERT INTO profiles (uid, username, name, country, language, gender, education, city, date_of_birth, bio, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+      `INSERT INTO profiles (uid, username, name, country, language, gender, education, city, date_of_birth, bio, avatar, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
        ON CONFLICT(uid) DO UPDATE SET
          username = COALESCE(excluded.username, username),
          name = COALESCE(excluded.name, name),
@@ -152,6 +159,7 @@ export function upsertProfile(uid: string, input: Partial<Profile>): void {
          city = COALESCE(excluded.city, city),
          date_of_birth = COALESCE(excluded.date_of_birth, date_of_birth),
          bio = COALESCE(excluded.bio, bio),
+         avatar = COALESCE(excluded.avatar, avatar),
          updated_at = datetime('now')`
     )
     .run(
@@ -164,6 +172,7 @@ export function upsertProfile(uid: string, input: Partial<Profile>): void {
       input.education ?? null,
       input.city ?? null,
       input.date_of_birth ?? null,
-      input.bio ?? null
+      input.bio ?? null,
+      input.avatar ?? null
     );
 }
