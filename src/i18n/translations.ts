@@ -4,6 +4,7 @@ export interface Messages {
   landingTitle: string;
   landingTagline: string;
   landingButton: string;
+  mission: string;
   // Sign-in
   signinTitle: string;
   signinSubtitle: string;
@@ -45,6 +46,7 @@ const EN: Messages = {
   landingTitle: "SEAblings Only",
   landingTagline: "A community feed of news from ASEAN",
   landingButton: "Sign in / Create account",
+  mission: "A community news feed of ASEAN — news from your country and the region, in 15 languages, free to join.",
   signinTitle: "SEAblings Only",
   signinSubtitle: "Sign in or create an account to comment. Free, email-only.",
   email: "Email",
@@ -483,6 +485,7 @@ const BR: Partial<Messages> = {
 const FR: Partial<Messages> = {
   landingTagline: "Un flux communautaire d'actualités de l'Asie du Sud-Est (ASEAN)",
   landingButton: "Se connecter / Créer un compte",
+  mission: "Un flux communautaire de nouvelles de l'Asie du Sud-Est — des nouvelles de votre pays et de la région, en 15 langues. Gratuit à rejoindre.",
   signinSubtitle: "Se connecter ou créer un compte pour commenter. Gratuit, uniquement par e-mail.",
   email: "E-mail",
   password: "Mot de passe",
@@ -516,6 +519,7 @@ const FR: Partial<Messages> = {
 const TA: Partial<Messages> = {
   landingTagline: "ASEAN இன் செய்திகள் கம்யூனிட்டி தொகுப்பு",
   landingButton: "உள்நுழை / கணக்கை உருவாக்கு",
+  mission: "ASEAN இன் செய்திகள் கம்யூனிட்டி தொகுப்பு — உங்கள் நாட்டின் மற்றும் பிராந்தியப் செய்திகள், 15 மொழிகளில். இலவசம்.",
   signinSubtitle: "கருத்து பதிவு செய்தால் உள்நுழையவும் அல்லது ஒரு கணக்கை உருவாக்கவும். இலவசம், மின்னஞ்சல் மட்டும்.",
   email: "மின்னஞ்சல்",
   password: "கடவுச்சொல்",
@@ -549,6 +553,7 @@ const TA: Partial<Messages> = {
 const ILO: Partial<Messages> = {
   landingTagline: "Pakasaritaan nga komunidad ti ASEAN",
   landingButton: "ENTER / PARTIDUAN",
+  mission: "Pakasaritaan ti ASEAN — ngan iti imong bansa ken bansado, iti 15 kasingan, libre a sumar.",
   signinSubtitle: "ENTER o PARTIDUAN tapno mabigat ti pagkomento. Libre, email lang.",
   email: "Email",
   password: "Password",
@@ -582,6 +587,7 @@ const ILO: Partial<Messages> = {
 const CEB: Partial<Messages> = {
   landingTagline: "Usa ka komunidad nga mga balit-an gikan sa ASEAN",
   landingButton: "I-ENTER / Partiduan",
+  mission: "Usa ka komunidad nga balit-an sa ASEAN — sa imong bansa ug rehiyon, sa 15 ka mga lenguahe, libre nga sumbot.",
   signinSubtitle: "I-ENTER o Partiduan tapno mabigat ang mga komento. Libre, email lang.",
   email: "Email",
   password: "Password",

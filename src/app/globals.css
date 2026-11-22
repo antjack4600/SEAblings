@@ -34,3 +34,47 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+/* Landing — animated gradient headline */
+.grad-text {
+  background-image: linear-gradient(110deg, #E8E0D0, #0D9CA8, #F2B84B);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradShift 7s ease infinite;
+}
+
+@keyframes gradShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 30%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Landing — floating logo */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.logo-float {
+  animation: float 3.5s ease-in-out infinite;
+}
+
+/* Landing — hero entrance (staggered) */
+.enter-stagger {
+  animation: enter 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.enter-stagger.delay-1 { animation-delay: 0.1s; }
+.enter-stagger.delay-2 { animation-delay: 0.2s; }
+.enter-stagger.delay-3 { animation-delay: 0.3s; }
+
+@keyframes enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0px); }
+}
+
+/* Landing — WebGL shader background sits behind the content */
+.shader-bg {
+  z-index: -1;
+}
