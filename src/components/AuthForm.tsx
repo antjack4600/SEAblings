@@ -9,7 +9,8 @@ import { useLanguageStore } from "@/i18n/store";
 const inputClass =
   "w-full rounded-md border border-border bg-card px-3 py-2 text-foreground placeholder:text-foreground/40";
 
-export default function AuthForm({ title }: { title: string }) {
+export default function AuthForm({ title }: { title?: string }) {
+  void title; // optional page label; the form labels itself via translations
   const { lang } = useLanguageStore();
   const m = t(lang);
   const [email, setEmail] = useState("");

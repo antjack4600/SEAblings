@@ -119,6 +119,48 @@ def test_dark_mode_toggle_on_settings():
         browser.close()
 
 
+def test_language_switch_new_languages():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(viewport=MOBILE_VP)
+        errors = page_errors(page)
+        page.goto(f"{APP}/settings", wait_until="networkidle")
+        page.wait_for_timeout(1200)
+        # Switch to French -> <html lang="fr"> + translated labels
+        page.select_option("select[aria-label='Language']", "fr")
+        page.wait_for_timeout(400)
+        assert page.evaluate("document.documentElement.lang") == "fr"
+        assert page.get_by_text("Mode sombre").count() == 1
+        # Switch to Tamil -> <html lang="ta">
+        page.select_option("select[aria-label='Langue']", "ta")
+        page.wait_for_timeout(400)
+        assert page.evaluate("document.documentElement.lang") == "ta"
+        # Switch to Ilocano -> <html lang="ilo">
+        page.select_option("select[aria-label='மொழி']", "ilo")
+        page.wait_for_timeout(400)
+        assert page.evaluate("document.documentElement.lang") == "ilo"
+        expect_no_errors(errors)
+        browser.close()
+
+
+def test_feed_filter_lists_new_languages():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(viewport=MOBILE_VP)
+        errors = page_errors(page)
+        page.goto(f"{APP}/feed", wait_until="networkidle")
+        page.wait_for_timeout(1200)
+        # The language filter lists the new languages with their country mappings.
+        for code, expected in [("fr", "cambodia"), ("ta", "singapore"), ("ilo", "philippines"), ("ceb", "philippines")]:
+            hits = page.locator(f'select option[value="{code}"]').filter(has_text=expected)
+            assert hits.count() >= 1, f"feed filter missing option {code} ({expected})"
+        # The header switcher also offers the new codes.
+        for code in ["fr", "ta", "ilo", "ceb"]:
+            assert page.locator(f"select[aria-label='Language'] option[value='{code}']").count() == 1
+        expect_no_errors(errors)
+        browser.close()
+
+
 if __name__ == "__main__":
     os.makedirs(SCREENSHOTS, exist_ok=True)
     test_feed_page_mobile()

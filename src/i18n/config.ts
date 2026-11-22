@@ -26,6 +26,10 @@ export const LANGUAGES: Language[] = [
   { code: "tet", name: "Tetum", label: "Tetum (East Timor)", locale: "tet-TL", flag: "🇹🇱" },
   { code: "zh", name: "中文", label: "中文 (Mandarin)", locale: "zh-CN", flag: "🇨🇳" },
   { code: "yue", name: "粤語", label: "粤語 (Cantonese)", locale: "yue-HK", flag: "🇭🇰" },
+  { code: "fr", name: "Français", label: "Français (French)", locale: "fr-FR", flag: "🇫🇷" },
+  { code: "ta", name: "தமிழ்", label: "தமிழ் (Tamil)", locale: "ta-IN", flag: "🇮🇳" },
+  { code: "ilo", name: "Ilocano", label: "Ilocano (Philippines)", locale: "ilo-PH", flag: "🇵🇭" },
+  { code: "ceb", name: "Cebuano", label: "Cebuano (Philippines)", locale: "ceb-PH", flag: "🇵🇭" },
 ];
 
 export const DEFAULT_LANGUAGE: Language = LANGUAGES[0]; // English default
