@@ -69,6 +69,13 @@ export default function AboutPage() {
           follows you. Preference changes apply immediately and are saved with your account.
         </p>
         <p className="text-sm leading-relaxed text-foreground/70">
+          Translation is part of the feed rather than an afterthought: a story from Manila can be
+          discussed by someone in Jakarta or Yangon, and a reader in Bangkok can follow a report
+          written in Vietnamese. The site is free to read, with no advertising to wade through,
+          and the app is also available on the App Store and Google Play for people who want the
+          feed on their phone.
+        </p>
+        <p className="text-sm leading-relaxed text-foreground/70">
           Submissions are reviewed before publication. The form accepts topics, videos and
           events, and Anthony decides what goes up. That keeps the feed short enough to read and
           cuts the noise that makes regional news hard to follow. Corrections and thoughtful
