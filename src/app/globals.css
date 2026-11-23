@@ -79,6 +79,26 @@ body {
   z-index: -1;
 }
 
+/* Landing — the sign-in entry keeps the shared footer compact. */
+.landing-footer footer {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.landing-footer nav {
+  gap: 0.25rem 0.75rem;
+}
+
+/* Landing — short screens drop secondary detail instead of scrolling. */
+@media (max-height: 700px) {
+  .landing-mission,
+  .landing-badges {
+    display: none;
+  }
+}
+
 /* a11y — honor prefers-reduced-motion: the landing animations are decorative loops. */
 @media (prefers-reduced-motion: reduce) {
   .grad-text,
