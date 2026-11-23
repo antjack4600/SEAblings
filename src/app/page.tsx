@@ -110,7 +110,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <div className="flex shrink-0 flex-col items-center gap-2 pt-1">
+      {/* Keep the footer band above the hero card in the stacking order so any
+          residual card overflow can never cover the footer links. */}
+      <div className="relative z-20 flex shrink-0 flex-col items-center gap-2 pt-1">
         <div className="landing-badges">
           <AppStoreBadges />
         </div>

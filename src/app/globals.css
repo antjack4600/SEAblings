@@ -166,10 +166,18 @@ body {
   gap: 0.25rem 0.75rem;
 }
 
-/* Landing — short screens drop secondary detail instead of scrolling. */
+/* Landing — short screens drop secondary detail instead of scrolling.
+   The long extra paragraph is the first thing to go: on intermediate
+   heights it made the hero card overflow its flex section and paint over
+   the footer links. */
+@media (max-height: 840px) {
+  .landing-extra {
+    display: none;
+  }
+}
+
 @media (max-height: 700px) {
   .landing-mission,
-  .landing-extra,
   .landing-badges {
     display: none;
   }
