@@ -16,7 +16,7 @@ import LikeButton from "@/components/LikeButton";
 
 const COUNTRIES = [
   "afghanistan", "bangladesh", "bhutan", "brunei", "cambodia", "china", "east-timor",
-  "hong-kong", "india", "indonesia", "iran", "iran", "iraq", "israel", "japan",
+  "hong-kong", "india", "indonesia", "iran", "iraq", "israel", "japan",
   "jordan", "kazakhstan", "kenya", "kuwait", "kyrgyzstan", "laos", "lebanon",
   "malaysia", "mongolia", "myanmar", "nepal", "oman", "pakistan", "philippines",
   "qatar", "saudi-arabia", "singapore", "south-korea", "sri-lanka", "syria",
@@ -30,7 +30,7 @@ const inputClass =
 // Username: no spaces, must contain at least one letter, allows Unicode/language of choice
 function isValidUsername(v: string): boolean {
   const t = v.trim();
-  return t.length > 0 && !/\s/.test(t) && /[^\d\W]/.test(t);
+  return t.length > 0 && !/\\s/.test(t) && /[^\\d\\W]/.test(t);
 }
 
 // Letter avatar used when the user has not uploaded a picture yet.
@@ -175,17 +175,7 @@ export default function ProfilePage() {
           </div>
           <LanguageSwitcher />
         </div>
-        {!user ? (
-          <div className="mt-6 space-y-3 text-sm text-foreground/70">
-            <p>
-              Sign in to edit your details —{" "}
-              <a href="/sign-in" className="underline text-gold hover:text-gold/90">
-                Sign in
-              </a>
-              .
-            </p>
-          </div>
-        ) : (
+        {user ? (
           <form onSubmit={onSubmit} className="mt-4 flex flex-col gap-3">
             <div className="flex items-center gap-3">
               <img
@@ -268,6 +258,16 @@ export default function ProfilePage() {
             </button>
             {msg && <p className="text-sm text-gold">{msg}</p>}
           </form>
+        ) : (
+          <div className="mt-6 space-y-3 text-sm text-foreground/70">
+            <p>
+              Sign in to edit your details —{" "}
+              <a href="/sign-in" className="underline text-gold hover:text-gold/90">
+                Sign in
+              </a>
+              .
+            </p>
+          </div>
         )}
         {loading && <p className="mt-4 text-foreground/60">{m.loading}</p>}
         

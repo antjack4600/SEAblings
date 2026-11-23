@@ -129,7 +129,7 @@ export function seedDb(): void {
       ('br','brunei',1/11), ('rki','east-timor',1/11);
   `);
   // Seed 20 initial posts about ASEAN countries (plan §3).
-  const initPostsStmt = db.prepare(`
+  const initPostsStmt = db!.prepare(`
     INSERT INTO posts (id, language_code, country_code, kind, title, body, summary, created_at)
     VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
     ON CONFLICT(id) DO NOTHING
