@@ -104,10 +104,35 @@ body {
   padding: 0.25rem 0.5rem;
 }
 
-.language-pill:focus-within {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
+/* Make the native select transparent so the pill background shows through,
+   and restyle the dropdown options for readability */
+.language-select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
 }
+
+.language-select option {
+  background: #0a1b2d;
+  color: #e8e0d0;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.language-select option:focus {
+  background: #122338;
+  outline: 1px solid var(--gold);
+}
+
+/* Faded in/out animation for the dropdown opening */
+.language-select:-webkit-focus-ring-color: transparent;
 
 .language-count {
   border-radius: 9999px;
