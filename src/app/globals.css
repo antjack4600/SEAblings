@@ -132,7 +132,10 @@ body {
 }
 
 /* Faded in/out animation for the dropdown opening */
-.language-select:-webkit-focus-ring-color: transparent;
+.language-select {
+  -webkit-focus-ring-color: transparent;
+  outline: none;
+}
 
 .language-count {
   border-radius: 9999px;
@@ -191,14 +194,10 @@ body {
   gap: 0.25rem 0.75rem;
 }
 
-/* Landing — short screens drop secondary detail instead of scrolling.
-   The long extra paragraph is the first thing to go: on intermediate
-   heights it made the hero card overflow its flex section and paint over
-   the footer links. */
-@media (max-height: 840px) {
-  .landing-extra {
-    display: none;
-  }
+/* Landing — the extra paragraph overlaps footer links on many viewports,
+   so it is hidden globally to ensure footer accessibility. */
+.landing-extra {
+  display: none;
 }
 
 @media (max-height: 700px) {

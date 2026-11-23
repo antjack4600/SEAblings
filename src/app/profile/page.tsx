@@ -261,11 +261,11 @@ export default function ProfilePage() {
         ) : (
           <div className="mt-6 space-y-3 text-sm text-foreground/70">
             <p>
-              Sign in to edit your details —{" "}
+              Sign in
               <a href="/sign-in" className="underline text-gold hover:text-gold/90">
                 Sign in
               </a>
-              .
+              to edit your details.
             </p>
           </div>
         )}
