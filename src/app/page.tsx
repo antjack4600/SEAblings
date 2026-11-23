@@ -8,6 +8,7 @@ import { useAuth } from "@/app/providers/AuthProvider";
 import LanguageSwitcher from "@/i18n/LanguageSwitcher";
 import AuthForm from "@/components/AuthForm";
 import ShaderBackground from "@/components/ShaderBackground";
+import AseanFlags from "@/components/AseanFlags";
 import AppStoreBadges from "@/components/AppStoreBadges";
 import Footer from "@/components/Footer";
 
@@ -58,25 +59,36 @@ export default function LandingPage() {
           <img
             src="/SEAb lings_Only_logo.svg"
             alt=""
-            width={84}
-            height={84}
-            className="landing-logo h-[60px] w-[60px] shrink-0 rounded-md object-cover logo-float sm:h-[84px] sm:w-[84px]"
+            width={32}
+            height={32}
+            className="h-8 w-8 shrink-0 rounded-md object-cover"
           />
           <span className="truncate text-sm font-semibold text-foreground/80 sm:text-base">
             {m.landingTitle}
           </span>
         </div>
-        <LanguageSwitcher />
+        <LanguageSwitcher id="language-switcher" />
       </header>
 
       <section className="flex min-h-0 flex-1 justify-center">
         <div className="my-auto w-full max-w-md rounded-xl border border-border bg-card/75 p-4 shadow-xl backdrop-blur-sm sm:p-6">
+          <img
+            src="/SEAb lings_Only_logo.svg"
+            alt=""
+            width={84}
+            height={84}
+            className="landing-logo logo-float mx-auto mb-2 h-[60px] w-[60px] rounded-xl object-cover sm:h-[84px] sm:w-[84px]"
+          />
           <h1 className="enter-stagger grad-text text-center text-3xl font-black leading-tight sm:text-4xl">
             {m.landingTitle}
           </h1>
-          <p className="enter-stagger delay-1 mt-2 text-center text-sm leading-snug text-foreground/75 sm:text-base">
+          <p data-landing-tagline className="enter-stagger delay-1 mt-2 text-center text-sm leading-snug text-foreground/75 sm:text-base">
             {m.landingTagline}
           </p>
+          <AseanFlags />
+          <div className="mt-3 flex justify-center">
+            <LanguageSwitcher id="language-switcher-hero" />
+          </div>
           <p className="enter-stagger delay-2 landing-mission mt-2 line-clamp-2 text-center text-xs leading-snug text-foreground/60 sm:text-sm">
             {m.mission}
           </p>
