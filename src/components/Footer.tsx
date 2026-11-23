@@ -19,6 +19,7 @@ export default function Footer() {
         <a href="/sign-in" className={linkClass}>{m.footerSignIn}</a>
         <a href="/contact" className={linkClass}>{m.footerContact}</a>
         <a href="/privacy-policy" className={linkClass}>{m.footerPrivacyPolicy}</a>
+        <a href="/terms" className={linkClass}>{m.termsLink}</a>
       </nav>
     </footer>
   );

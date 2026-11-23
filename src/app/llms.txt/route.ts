@@ -17,6 +17,7 @@ export async function GET() {
 - [About](http://localhost:3101/about): what SEAblings Only is.
 - [Contact](http://localhost:3101/contact): how to reach SEAblings Only.
 - [Privacy policy](http://localhost:3101/privacy-policy): what SEAblings Only collects.
+- [Terms of use](http://localhost:3101/terms): terms of use and the ASEAN names and flags disclaimer.
 
 ## API
 
