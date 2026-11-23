@@ -144,7 +144,12 @@ export default function ProfilePage() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ uid: user.uid, username, name, country, language, gender, education, city, date_of_birth: dateOfBirth, bio, avatar: avatarPreview ?? null }),
       });
-      setMsg(res.ok ? "profileSave" : "errorMsg");
+      if (res.ok) {
+        setMsg("profileSave");
+        window.location.href = "/feed";
+      } else {
+        setMsg("errorMsg");
+      }
     } catch {
       setMsg("errorMsg");
     } finally {
@@ -219,7 +224,7 @@ export default function ProfilePage() {
             </label>
             <label className="text-sm text-foreground/70">
               Preferred language
-              <select value={language} onChange={(e) => setLanguage(e.target.value)} className={inputClass + " mt-1"}>
+              <select value={language} onChange={(e) => setLanguage(e.target.value)} className="w-full rounded-md border border-border bg-[#0a1b2d] px-3 py-2 text-foreground">
                 <option value="">Select language</option>
                 {LANGUAGES.map((l) => (
                   <option key={l.code} value={l.code}>{l.name}</option>
@@ -252,7 +257,6 @@ export default function ProfilePage() {
               Bio
               <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={3} className={inputClass} placeholder="Tell us a bit about yourself" />
             </label>
-            <LikeButton targetUid={""} />
             <button type="submit" disabled={busy} className="rounded-md bg-accent px-3 py-2 font-medium text-background hover:bg-accent/90 disabled:opacity-50">
               {busy ? "…" : m.profileSave}
             </button>
