@@ -18,11 +18,13 @@ export default function LandingPage() {
   const m = t(lang);
   const [visualHeight, setVisualHeight] = useState<number | null>(null);
 
-  // Redirect signed-in users to the feed. A full navigation avoids Next's
-  // client-transition keeping the landing DOM mounted beside the feed.
+  // Redirect signed-in users: if they have a profile, → feed; otherwise → profile.
   useEffect(() => {
     if (user) {
-      window.location.replace("/feed");
+      fetch(`/api/profile/exists?uid=${encodeURIComponent(user.uid)}`)
+        .then((r) => r.json())
+        .then((d) => window.location.replace(d.exists ? "/feed" : "/profile"))
+        .catch(() => window.location.replace("/feed"));
     }
   }, [user]);
 

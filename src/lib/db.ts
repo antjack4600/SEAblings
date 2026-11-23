@@ -83,6 +83,19 @@ export function getDb(): Database.Database {
     if (!profileCols.some((c) => c.name === "avatar")) {
       db.exec("ALTER TABLE profiles ADD COLUMN avatar TEXT");
     }
+    // Migration: friend/like connections between users.
+    const friendCols = db.prepare("PRAGMA table_info(friends)").all() as Array<{ name: string }>;
+    if (!friendCols.some((c) => c.name === "id")) {
+      db.exec(`
+        CREATE TABLE IF NOT EXISTS friends (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          liker_uid TEXT NOT NULL,
+          liked_uid TEXT NOT NULL,
+          created_at TEXT DEFAULT (datetime("now")),
+          UNIQUE(liker_uid, liked_uid)
+        );
+      `);
+    }
     // Migration: authored multilingual headlines live on the post itself.
     const postCols = db.prepare("PRAGMA table_info(posts)").all() as Array<{ name: string }>;
     if (!postCols.some((c) => c.name === "translations")) {
