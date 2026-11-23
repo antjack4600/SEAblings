@@ -14,7 +14,10 @@ APP = os.environ.get("APP_URL", "http://localhost:3101")
 MOBILE_VP = {"width": 375, "height": 812}
 TABLET_VP = {"width": 768, "height": 1024}
 
-SCREENSHOTS = "/tmp/opencode/sea_blings_screenshots"
+SCREENSHOTS = os.path.normpath(
+    os.path.join(os.path.dirname(__file__), "..", "..", "session-artifacts", "screenshots")
+)
+os.makedirs(SCREENSHOTS, exist_ok=True)
 
 
 def page_errors(page) -> list:

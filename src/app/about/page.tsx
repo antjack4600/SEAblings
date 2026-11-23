@@ -76,6 +76,12 @@ export default function AboutPage() {
           feed on their phone.
         </p>
         <p className="text-sm leading-relaxed text-foreground/70">
+          Questions are welcome through the <a href="/contact" className="text-gold underline hover:text-gold/90">contact</a> page, and your{" "}
+          <a href="/profile" className="text-gold underline hover:text-gold/90">profile</a> and{" "}
+          <a href="/settings" className="text-gold underline hover:text-gold/90">settings</a> are always available from the site links.
+          When you are ready, open the <a href="/feed" className="text-gold underline hover:text-gold/90">community feed</a> to read today's stories.
+        </p>
+        <p className="text-sm leading-relaxed text-foreground/70">
           Submissions are reviewed before publication. The form accepts topics, videos and
           events, and Anthony decides what goes up. That keeps the feed short enough to read and
           cuts the noise that makes regional news hard to follow. Corrections and thoughtful

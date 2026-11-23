@@ -65,6 +65,18 @@ export default function LandingPage() {
           <p className="enter-stagger delay-2 landing-mission mt-2 line-clamp-2 text-center text-xs leading-snug text-foreground/60 sm:text-sm">
             {m.mission}
           </p>
+          <p className="landing-extra mt-3 text-center text-[11px] leading-snug text-foreground/55 sm:text-xs">
+            Reporting from Indonesia, Malaysia, Thailand, Vietnam, Myanmar, Laos, Cambodia,
+            the Philippines, Brunei and East Timor. Pick one of 17 languages and the feed
+            follows you, with translation between members so a story from Manila can be
+            discussed in Jakarta. Reading is free and there is no advertising. Explore the{" "}
+            <a href="/feed" className="text-gold underline hover:text-gold/90">community feed</a>{" "}
+            and our <a href="/about" className="text-gold underline hover:text-gold/90">about</a>{" "}
+            page, or send a{" "}
+            <a href="/suggestions" className="text-gold underline hover:text-gold/90">suggestion</a>.
+            Comments are open to members, and Anthony reviews each suggestion before a story
+            goes live. The discussion continues across the region every day.
+          </p>
           <div className="enter-stagger delay-3 mt-5">
             <AuthForm />
           </div>
