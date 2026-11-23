@@ -61,6 +61,12 @@ body {
   animation: float 3.5s ease-in-out infinite;
 }
 
+/* Landing — glow that makes the larger logo read against the shader. */
+.landing-logo {
+  filter: drop-shadow(0 0 12px rgba(13, 156, 168, 0.55))
+    drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+}
+
 /* Landing — hero entrance (staggered) */
 .enter-stagger {
   animation: enter 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -74,9 +80,17 @@ body {
   to { opacity: 1; transform: translateY(0px); }
 }
 
-/* Landing — WebGL shader background sits behind the content */
+/* Landing — WebGL shader sits behind the content; the wrapper is the
+   gradient fallback when WebGL is unavailable. */
+.shader-fallback {
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(242, 184, 75, 0.14), transparent 55%),
+    radial-gradient(ellipse at 15% 85%, rgba(13, 156, 168, 0.35), transparent 60%),
+    linear-gradient(160deg, #081326 0%, #0a2135 55%, #0d3a44 100%);
+}
+
 .shader-bg {
-  z-index: -1;
+  display: block;
 }
 
 /* Landing — the sign-in entry keeps the shared footer compact. */

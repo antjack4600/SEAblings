@@ -58,9 +58,9 @@ export default function LandingPage() {
           <img
             src="/SEAb lings_Only_logo.svg"
             alt=""
-            width={56}
-            height={56}
-            className="h-10 w-10 shrink-0 rounded-md object-cover logo-float sm:h-14 sm:w-14"
+            width={84}
+            height={84}
+            className="landing-logo h-[60px] w-[60px] shrink-0 rounded-md object-cover logo-float sm:h-[84px] sm:w-[84px]"
           />
           <span className="truncate text-sm font-semibold text-foreground/80 sm:text-base">
             {m.landingTitle}
