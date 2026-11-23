@@ -94,6 +94,7 @@ body {
 /* Landing — short screens drop secondary detail instead of scrolling. */
 @media (max-height: 700px) {
   .landing-mission,
+  .landing-extra,
   .landing-badges {
     display: none;
   }
