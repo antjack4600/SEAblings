@@ -70,6 +70,14 @@ export interface Messages {
   privacyDesc: string;
   footerAbout: string;
   footerContact: string;
+  // Vibrant localized landing / legal
+  languageCount: string;
+  aseanLabel: string;
+  feedOriginal: string;
+  termsLink: string;
+  privacyLink: string;
+  legalDisclaimer: string;
+  legalIntro: string;
 }
 
 const EN: Messages = {
@@ -137,6 +145,13 @@ const EN: Messages = {
   privacyDesc: "What SEAblings Only collects and how it protects you",
   footerAbout: "About",
   footerContact: "Contact",
+  languageCount: "17 languages",
+  aseanLabel: "ASEAN · 11 nations",
+  feedOriginal: "Original",
+  termsLink: "Terms of Use",
+  privacyLink: "Privacy Policy",
+  legalDisclaimer: "Country names and flags are used descriptively, not as endorsement.",
+  legalIntro: "Legal information",
 };
 
 // Best-effort translations for the community languages (hard scripts approximate).
@@ -1032,6 +1047,99 @@ const CEB: Partial<Messages> = {
   footerContact: "Contact",
 };
 
+// Tetum (East Timor) — authored so all 17 configured languages resolve.
+const TET: Partial<Messages> = {
+  landingTagline: "Uma notísia komunidade husi ASEAN",
+  landingButton: "Entra / Kria konta",
+  mission: "Uma notísia komunidade ASEAN — notísia husi nasaun ida no rejiaun, iha 17 língua, gratuitu.",
+  signinTitle: "SEAblings Only",
+  signinSubtitle: "Entra ka kria konta atu komenta. Gratuitu, ho email deit.",
+  email: "Email",
+  password: "Pasword",
+  signinButton: "Entra / Kria konta",
+  signedInMsg: "Entra ona. Haree email, dudu link konfirmasaun.",
+  signupMsg: "Konta kria ona. Haree email, dudu link konfirmasaun.",
+  errorMsg: "Aku ate. Favor tente fali.",
+  feedTitle: "SEAblings Only",
+  feedEmpty: "La iha notísia.",
+  loading: "Karregadu…",
+  settingsLink: "Definisaun",
+  ariaLanguageLabel: "Língua",
+  settingsTitle: "Definisaun",
+  settingsDesc: "Aparénsia no definisaun aplikasaun",
+  darkModeLabel: "Modu skuru",
+  optLight: "Klaru",
+  optDark: "Skuru",
+  optSystem: "Sistema (padraun)",
+  voteFor: "Vota",
+  vote: "Vota",
+  results: "Resultadu",
+  signInToComment: "Entra atu komenta.",
+  profileTitle: "Dados pessoais",
+  profileCountry: "Nasaun",
+  profileCity: "Sidade",
+  profileLanguage: "Língua",
+  profileBirthDate: "Data natal",
+  profileBio: "Biu",
+  profileSave: "Rai Mudansa",
+  forgotPasswordLabel: "Esquece pasword?",
+  resetSentMsg: "Link atu troka pasword haruka ona ba email.",
+  validEmailMsg: "Favor hatama email valiku (naran@exemplu.com).",
+  nameInvalidMsg: "Naran bele deit letra no espasu.",
+  changePasswordHeader: "Troka pasword",
+  currentPasswordLabel: "Pasword atual",
+  newPasswordLabel: "Pasword foun",
+  confirmNewPasswordLabel: "Konfirma pasword foun",
+  passwordTooShortMsg: "Pasword foun tenke iha 6 karater.",
+  passConflictMsg: "Pasword foun no konfirmasaun la hanesan.",
+  passwordSavedMsg: "Pasword atualizadu.",
+  deleteAccountHeader: "Apaga konta",
+  deleteAccountConfirmMsg: "Labele fila fali. Apaga konta?",
+  profileAvatarLabel: "Foto perfil",
+  profileAvatarError: "Favor hili imajen JPEG ka PNG.",
+  footerHome: "Inísiu",
+  footerSuggestions: "Sujestaun",
+  footerProfile: "Perfil",
+  footerSettings: "Definisaun",
+  footerSignIn: "Entra",
+  footerPrivacyPolicy: "Polítika privasidade",
+  skipToMain: "Pula ba konteúdu prinsipal",
+  aboutTitle: "Kona-ba SEAblings Only",
+  aboutDesc: "Kona-ba uma notísia komunidade SEAblings Only",
+  contactTitle: "Kontaktu",
+  contactDesc: "Oinsá atu kontaktu SEAblings Only",
+  privacyTitle: "Polítika privasidade",
+  privacyDesc: "Saida SEAblings Only rai no oinsá proteje",
+  footerAbout: "Kona-ba",
+  footerContact: "Kontaktu",
+};
+
+type ExtraMessages = Pick<
+  Messages,
+  "languageCount" | "aseanLabel" | "feedOriginal" | "termsLink" | "privacyLink" | "legalDisclaimer" | "legalIntro"
+>;
+
+// Authored per language; merged after each catalog so no English fallback is possible.
+const EXTRA: Record<string, ExtraMessages> = {
+  en: { languageCount: EN.languageCount, aseanLabel: EN.aseanLabel, feedOriginal: EN.feedOriginal, termsLink: EN.termsLink, privacyLink: EN.privacyLink, legalDisclaimer: EN.legalDisclaimer, legalIntro: EN.legalIntro },
+  id: { languageCount: "17 bahasa", aseanLabel: "ASEAN · 11 negara", feedOriginal: "Asli", termsLink: "Ketentuan Penggunaan", privacyLink: "Kebijakan Privasi", legalDisclaimer: "Nama dan bendera negara digunakan sebagai keterangan, bukan dukungan.", legalIntro: "Informasi hukum" },
+  ms: { languageCount: "17 bahasa", aseanLabel: "ASEAN · 11 negara", feedOriginal: "Asal", termsLink: "Terma Penggunaan", privacyLink: "Dasar Privasi", legalDisclaimer: "Nama dan bendera negara digunakan secara deskriptif, bukan sokongan.", legalIntro: "Maklumat undang-undang" },
+  th: { languageCount: "17 ภาษา", aseanLabel: "อาเซียน · 11 ประเทศ", feedOriginal: "ต้นฉบับ", termsLink: "ข้อกำหนดการใช้งาน", privacyLink: "นโยบายความเป็นส่วนตัว", legalDisclaimer: "ชื่อและธงชาติใช้เพื่อบอกรายละเอียด ไม่ใช่การรับรอง", legalIntro: "ข้อมูลทางกฎหมาย" },
+  vi: { languageCount: "17 ngôn ngữ", aseanLabel: "ASEAN · 11 quốc gia", feedOriginal: "Bản gốc", termsLink: "Điều khoản sử dụng", privacyLink: "Chính sách quyền riêng tư", legalDisclaimer: "Tên và cờ quốc gia chỉ dùng để mô tả, không phải sự xác nhận.", legalIntro: "Thông tin pháp lý" },
+  my: { languageCount: "17 ဘာသာစကား", aseanLabel: "အာဆီယံ · ၁၁ နိုင်ငံ", feedOriginal: "မူရင်း", termsLink: "အသုံးပြုမှု စည်းကမ်းချက်များ", privacyLink: "ကိုယ်ရေးကိုယ်တာ မူဝါဒ", legalDisclaimer: "နိုင်ငံအမည်နှင့် အလံများကို ဖော်ပြချက်အဖြစ်သာ အသုံးပြုပြီး ထောက်ခံမှုမဟုတ်ပါ။", legalIntro: "ဥပဒေဆိုင်ရာ အချက်အလက်" },
+  km: { languageCount: "17 ភាសា", aseanLabel: "អាស៊ាន · ១១ ប្រទេស", feedOriginal: "ដើម", termsLink: "លក្ខខណ្ឌប្រើប្រាស់", privacyLink: "គោលការណ៍ឯកជនភាព", legalDisclaimer: "ឈ្មោះ និងទង់ជាតិប្រើសម្រាប់ពណ៌នាតែប៉ុណ្ណោះ មិនមែនជាការគាំទ្រទេ។", legalIntro: "ព័ត៌មានច្បាប់" },
+  tl: { languageCount: "17 wika", aseanLabel: "ASEAN · 11 bansa", feedOriginal: "Orihinal", termsLink: "Mga Tuntunin ng Paggamit", privacyLink: "Patakaran sa Privacy", legalDisclaimer: "Ang mga pangalan at watawat ng bansa ay deskriptibo lamang, hindi pag-endorso.", legalIntro: "Legal na impormasyon" },
+  lo: { languageCount: "17 ພາສາ", aseanLabel: "ອາຊຽນ · 11 ປະເທດ", feedOriginal: "ຕົ້ນສະບັບ", termsLink: "ເງື່ອນໄຂການໃຊ້", privacyLink: "ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ", legalDisclaimer: "ຊື່ ແລະ ທຸງຊາດໃຊ້ເພື່ອອະທິບາຍເທົ່ານັ້ນ ບໍ່ແມ່ນການຮັບຮອງ.", legalIntro: "ຂໍ້ມູນທາງກົດໝາຍ" },
+  br: { languageCount: "17 bahasa", aseanLabel: "ASEAN · 11 negara", feedOriginal: "Asal", termsLink: "Terma Penggunaan", privacyLink: "Dasar Privasi", legalDisclaimer: "Nama dan bendera negara digunakan secara deskriptif, bukan sokongan.", legalIntro: "Maklumat undang-undang" },
+  rki: { languageCount: "17 ဘာသာစကား", aseanLabel: "အာဆီယံ · ၁၁ နိုင်ငံ", feedOriginal: "မူရင်း", termsLink: "အသုံးပြုမှု စည်းကမ်းချက်များ", privacyLink: "ကိုယ်ရေးကိုယ်တာ မူဝါဒ", legalDisclaimer: "နိုင်ငံအမည်နှင့် အလံများကို ဖော်ပြချက်အဖြစ်သာ အသုံးပြုပါသည်။", legalIntro: "ဥပဒေဆိုင်ရာ အချက်အလက်" },
+  pt: { languageCount: "17 idiomas", aseanLabel: "ASEAN · 11 países", feedOriginal: "Original", termsLink: "Termos de Uso", privacyLink: "Política de Privacidade", legalDisclaimer: "Os nomes e bandeiras dos países são usados de forma descritiva, não como endosso.", legalIntro: "Informação legal" },
+  tet: { languageCount: "17 língua", aseanLabel: "ASEAN · 11 nasaun", feedOriginal: "Orijinal", termsLink: "Kondisaun Uzu", privacyLink: "Polítika Privasidade", legalDisclaimer: "Nama no bandeira nasaun uza deskripsivamente, lai endorsement.", legalIntro: "Informasaun legál" },
+  zh: { languageCount: "17 种语言", aseanLabel: "东盟 · 11 国", feedOriginal: "原文", termsLink: "使用条款", privacyLink: "隐私政策", legalDisclaimer: "国家名称和旗帜仅作描述用途，不代表认可或背书。", legalIntro: "法律信息" },
+  yue: { languageCount: "17 種語言", aseanLabel: "東盟 · 11 國", feedOriginal: "原文", termsLink: "使用條款", privacyLink: "私隱政策", legalDisclaimer: "國家名稱同旗幟只作描述用途，唔代表認可或背書。", legalIntro: "法律資料" },
+  ilo: { languageCount: "17 pagsasao", aseanLabel: "ASEAN · 11 pagilian", feedOriginal: "Orihinal", termsLink: "Alagaden ti Panagusar", privacyLink: "Politika ti Privacidad", legalDisclaimer: "Dagiti nagan ken watawat ti pagilian ket deskriptibo laeng, saan a panag-endorso.", legalIntro: "Legal nga impormasyon" },
+  ceb: { languageCount: "17 ka lenguahe", aseanLabel: "ASEAN · 11 ka nasod", feedOriginal: "Orihinal", termsLink: "Mga Termino sa Paggamit", privacyLink: "Polisiya sa Privacy", legalDisclaimer: "Ang mga ngalan ug bandera sa nasod gigamit nga deskripsyon, dili pag-endorso.", legalIntro: "Impormasyon sa balaod" },
+};
+
 export const MESSAGES: Record<string, Partial<Messages>> = {
   en: EN,
   id: ID,
@@ -1049,8 +1157,9 @@ export const MESSAGES: Record<string, Partial<Messages>> = {
   br: BR,
   ilo: ILO,
   ceb: CEB,
+  tet: TET,
 };
 
 export function getMessages(code: string): Messages {
-  return { ...EN, ...MESSAGES[code] } as Messages;
+  return { ...EN, ...MESSAGES[code], ...EXTRA[code] } as Messages;
 }
