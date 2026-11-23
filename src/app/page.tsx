@@ -1,7 +1,7 @@
 // src/app/page.tsx — SEAblings Only landing page: a single-screen sign-in entry.
 // Everything a visitor needs to sign in is visible without scrolling.
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { t } from "@/i18n/t";
 import { useLanguageStore } from "@/i18n/store";
@@ -17,6 +17,7 @@ export default function LandingPage() {
   const router = useRouter();
   const { lang } = useLanguageStore();
   const m = t(lang);
+  const [visualHeight, setVisualHeight] = useState<number | null>(null);
 
   // Redirect signed-in users to the feed
   useEffect(() => {
@@ -25,10 +26,25 @@ export default function LandingPage() {
     }
   }, [user, router]);
 
+  // iOS Safari does not resize dvh for the virtual keyboard. When the visual
+  // viewport shrinks, cap the shell to it and let the form scroll into reach.
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const update = () => {
+      const covered = window.innerHeight - vv.height;
+      setVisualHeight(covered > 120 ? Math.round(vv.height) : null);
+    };
+    update();
+    vv.addEventListener("resize", update);
+    return () => vv.removeEventListener("resize", update);
+  }, []);
+
   return (
     <main
       id="main-content"
-      className="relative z-10 flex h-dvh flex-col overflow-hidden px-4 py-3 sm:px-6 sm:py-5"
+      style={visualHeight !== null ? { height: `${visualHeight}px` } : undefined}
+      className="relative z-10 flex h-dvh flex-col overflow-x-hidden overflow-y-auto px-4 py-3 sm:px-6 sm:py-5"
     >
       <a
         href="#main-content"
@@ -54,8 +70,8 @@ export default function LandingPage() {
         <LanguageSwitcher />
       </header>
 
-      <section className="flex min-h-0 flex-1 items-center justify-center">
-        <div className="w-full max-w-md rounded-xl border border-border bg-card/75 p-4 shadow-xl backdrop-blur-sm sm:p-6">
+      <section className="flex min-h-0 flex-1 justify-center">
+        <div className="my-auto w-full max-w-md rounded-xl border border-border bg-card/75 p-4 shadow-xl backdrop-blur-sm sm:p-6">
           <h1 className="enter-stagger grad-text text-center text-3xl font-black leading-tight sm:text-4xl">
             {m.landingTitle}
           </h1>

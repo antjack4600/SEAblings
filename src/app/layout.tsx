@@ -1,5 +1,5 @@
 // src/app/layout.tsx — SEAblings Only root layout (metadata base for the site).
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { SITE_NAME, SITE_URL } from "@/lib/siteUrl";
 import "./globals.css";
 import { AuthProvider } from "@/app/providers/AuthProvider";
@@ -38,6 +38,12 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: ["/og-image.png"],
   },
+};
+
+// Let the virtual keyboard resize the layout viewport so short-screen sign-in
+// controls are not covered on Android/Chrome (iOS is handled in page.tsx).
+export const viewport: Viewport = {
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

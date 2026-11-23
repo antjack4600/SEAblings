@@ -76,8 +76,9 @@ export default function AuthForm({ title }: { title?: string }) {
     }
   }
 
+  // noValidate: show the app's localized validation message instead of the browser's English one.
   return (
-    <form onSubmit={onSubmit} method="post" className="flex flex-col gap-3 w-full">
+    <form noValidate onSubmit={onSubmit} method="post" className="flex flex-col gap-3 w-full">
       <label className="text-sm text-foreground/70">
         {m.email}
         <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} />
@@ -92,16 +93,18 @@ export default function AuthForm({ title }: { title?: string }) {
       <button type="button" onClick={onForgot} disabled={resetBusy} className="self-start text-xs text-gold underline hover:opacity-80 disabled:opacity-50">
         {m.forgotPasswordLabel}
       </button>
-      {msg && (
-        <p role="alert" className="text-sm text-gold">
-          {msg}
-        </p>
-      )}
-      {resetMsg && (
-        <p role="alert" className="text-sm text-gold">
-          {resetMsg}
-        </p>
-      )}
+      <div aria-live="polite" aria-atomic="true">
+        {msg && (
+          <p role="alert" className="text-sm text-gold">
+            {msg}
+          </p>
+        )}
+        {resetMsg && (
+          <p role="alert" className="text-sm text-gold">
+            {resetMsg}
+          </p>
+        )}
+      </div>
     </form>
   );
 }
