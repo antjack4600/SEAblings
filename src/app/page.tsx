@@ -2,7 +2,6 @@
 // Everything a visitor needs to sign in is visible without scrolling.
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { t } from "@/i18n/t";
 import { useLanguageStore } from "@/i18n/store";
 import { useAuth } from "@/app/providers/AuthProvider";
@@ -14,17 +13,17 @@ import Footer from "@/components/Footer";
 
 export default function LandingPage() {
   const { user } = useAuth();
-  const router = useRouter();
   const { lang } = useLanguageStore();
   const m = t(lang);
   const [visualHeight, setVisualHeight] = useState<number | null>(null);
 
-  // Redirect signed-in users to the feed
+  // Redirect signed-in users to the feed. A full navigation avoids Next's
+  // client-transition keeping the landing DOM mounted beside the feed.
   useEffect(() => {
     if (user) {
-      router.push("/feed");
+      window.location.replace("/feed");
     }
-  }, [user, router]);
+  }, [user]);
 
   // iOS Safari does not resize dvh for the virtual keyboard. When the visual
   // viewport shrinks, cap the shell to it and let the form scroll into reach.
