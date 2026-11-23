@@ -3,3 +3,8 @@
 # static markup, and the rule docs recommend disabling the check in this case.
 [rules]
 disable = ["security/form-captcha"]
+
+# The homepage is now a sign-in entry like other social sites; its visible
+# copy is intentionally short. Other pages still exceed 300 words.
+[rule_options."content/word-count"]
+min_words = 150
