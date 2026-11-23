@@ -15,17 +15,22 @@ import Footer from "@/components/Footer";
 import LikeButton from "@/components/LikeButton";
 
 const COUNTRIES = [
-  "indonesia", "malaysia", "singapore", "thailand", "vietnam", "myanmar",
-  "laos", "cambodia", "philippines", "brunei", "east-timor", "united-states",
+  "afghanistan", "bangladesh", "bhutan", "brunei", "cambodia", "china", "east-timor",
+  "hong-kong", "india", "indonesia", "iran", "iran", "iraq", "israel", "japan",
+  "jordan", "kazakhstan", "kenya", "kuwait", "kyrgyzstan", "laos", "lebanon",
+  "malaysia", "mongolia", "myanmar", "nepal", "oman", "pakistan", "philippines",
+  "qatar", "saudi-arabia", "singapore", "south-korea", "sri-lanka", "syria",
+  "taiwan", "thailand", "turkmenistan", "turkey", "vietnam", "yemen",
+  "united-kingdom", "australia", "ireland", "new-zealand", "france", "european-union",
 ];
 
 const inputClass =
   "w-full rounded-md border border-border bg-card px-3 py-2 text-foreground";
 
-// Letters + spaces only: apostrophes and other symbols in names are rejected.
-function isValidName(v: string): boolean {
+// Username: no spaces, must contain at least one letter, allows Unicode/language of choice
+function isValidUsername(v: string): boolean {
   const t = v.trim();
-  return t.length > 0 && /^[\p{L}\s]+$/u.test(t) && /\p{L}/u.test(t);
+  return t.length > 0 && !/\s/.test(t) && /[^\d\W]/.test(t);
 }
 
 // Letter avatar used when the user has not uploaded a picture yet.
@@ -127,8 +132,8 @@ export default function ProfilePage() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!user) return;
-    if (!isValidName(name)) {
-      setMsg("nameInvalidMsg");
+    if (!isValidUsername(name)) {
+      setMsg("Username must not contain spaces and must include at least one letter.");
       setBusy(false);
       return;
     }
@@ -179,75 +184,9 @@ export default function ProfilePage() {
               </a>
               .
             </p>
-            <p>
-              Your details page is your public presence on SEAblings Only — a news feed
-              of ASEAN. Sign in and fill in your username, name, country, language and
-              other details — everything you add is visible on the site, and the whole
-              site translates to the language you pick.
-            </p>
-            <p>
-              Details — the username, name, country, language, gender, education, city,
-              date of birth and bio fields show up on this page once signed in. Others
-              read them, so share whatever you want — a short friendly bio tells people
-              about you and where you come from.
-            </p>
-            <p>
-              Photo — this page accepts a JPEG or PNG upload; a letter avatar is the
-              default until you upload one, and it shows across the site.
-            </p>
-            <p>
-              Saving — press Save after changing anything. It is public and persistent:
-              once saved, it stays across sessions and can be edited again anytime.
-            </p>
-            <p>
-              Everything you set here is visible to readers — pick a username that is
-              easy to find and a language you read in. Only share what you want to share.
-            </p>
-            <p>
-              When you return, the fields are waiting exactly as you left them. A short
-              introduction works better than a long list of facts: readers want to know which
-              part of the region you know well and what kind of stories you follow. You can edit
-              or clear any field later; nothing is fixed in place.
-            </p>
-            <p>
-              Your picture uses a JPEG or PNG file and is checked before it is saved. Until then
-              a letter tile stands in for it. Choosing a reading language here changes how the
-              site presents itself to you; the switcher at the top of the page does the same for
-              a single visit, while this setting travels with your account.
-            </p>
-            <p>
-              Saving is permanent until you make another change. Sign out and back in and the
-              same details will be waiting. Take a moment to read the bio as someone you have
-              just met — it is the line most readers will remember after your posts.
-            </p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="mt-4 flex flex-col gap-3">
-            <p className="text-sm text-foreground/60">
-              Edit your profile on SEAblings Only — country, language, and community details — then save it. Your profile is public across the site.
-            </p>
-            <p className="mt-6 text-sm leading-relaxed text-foreground/60">
-              Your profile is your public presence on SEAblings Only — the community news feed of
-              ASEAN. Fill in your username, name, and other details like your bio and country, then
-              save it. Every profile detail you choose to share is public in the community, so pick
-              your language carefully — the whole site translates.
-            </p>
-            <p className="mt-6 text-sm leading-relaxed text-foreground/60">
-              Community details — the username, name, country, language, gender, education, city,
-              date of birth, and bio fields are set here. The community reads them on your public
-              profile, so only share what you are comfortable with. Your profile is public across
-              the site — anyone can read it, so make the bio useful and friendly.
-            </p>
-            <p className="mt-6 text-sm leading-relaxed text-foreground/60">
-              Profile picture — choose a profile picture on this page: pick a JPEG or PNG file and
-              it uploads to your account, with a letter avatar as the default. Your picture appears
-              on your profile and in the community.
-            </p>
-            <p className="mt-6 text-sm leading-relaxed text-foreground/60">
-              Saving your profile — press Save profile after changing anything. The profile is
-              public and persistent: once saved, it stays across sessions, and editing it again is
-              always possible.
-            </p>
             <div className="flex items-center gap-3">
               <img
                 src={avatarPreview ?? letterAvatar(user.displayName ?? user.email ?? "?")}

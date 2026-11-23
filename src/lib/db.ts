@@ -22,7 +22,7 @@ export function getDb(): Database.Database {
         body TEXT,
         media_url TEXT,
         summary TEXT,
-        created_at TEXT DEFAULT (datetime('now'))
+        created_at TEXT
       );
       CREATE TABLE IF NOT EXISTS users (
         uid TEXT PRIMARY KEY,
@@ -41,15 +41,15 @@ export function getDb(): Database.Database {
         date_of_birth TEXT,
         bio TEXT,
         avatar TEXT,
-        created_at TEXT DEFAULT (datetime('now')),
-        updated_at TEXT DEFAULT (datetime('now'))
+        created_at TEXT,
+        updated_at TEXT
       );
       CREATE TABLE IF NOT EXISTS comments (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         post_id INTEGER NOT NULL REFERENCES posts(id),
         user_id TEXT,
         body TEXT NOT NULL,
-        created_at TEXT DEFAULT (datetime('now'))
+        created_at TEXT
       );
       CREATE TABLE IF NOT EXISTS suggestions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,7 +59,7 @@ export function getDb(): Database.Database {
         country_code TEXT,
         tags TEXT,
         status TEXT DEFAULT 'draft',
-        created_at TEXT DEFAULT (datetime('now'))
+        created_at TEXT
       );
       CREATE TABLE IF NOT EXISTS events (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -70,7 +70,7 @@ export function getDb(): Database.Database {
         starts_at TEXT,
         ends_at TEXT,
         description TEXT,
-        created_at TEXT DEFAULT (datetime('now'))
+        created_at TEXT
       );
       CREATE TABLE IF NOT EXISTS language_coverage (
         language_code TEXT PRIMARY KEY,
@@ -91,7 +91,7 @@ export function getDb(): Database.Database {
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           liker_uid TEXT NOT NULL,
           liked_uid TEXT NOT NULL,
-          created_at TEXT DEFAULT (datetime("now")),
+          created_at TEXT,
           UNIQUE(liker_uid, liked_uid)
         );
       `);
@@ -111,6 +111,8 @@ export function getDb(): Database.Database {
       if (row.translations || !authored) continue;
       setTranslations.run(JSON.stringify(authored), row.id);
     }
+    // Seed language coverage
+    seedDb();
   }
   return db;
 }
@@ -126,6 +128,27 @@ export function seedDb(): void {
       ('km','cambodia',1/11), ('fil','philippines',1/11), ('lo','laos',1/11),
       ('br','brunei',1/11), ('rki','east-timor',1/11);
   `);
+  // Seed 20 initial posts about ASEAN countries (plan §3).
+  const initPostsStmt = db.prepare(`
+    INSERT INTO posts (id, language_code, country_code, kind, title, body, summary, created_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
+    ON CONFLICT(id) DO NOTHING
+  `);
+  const seededPosts = [
+    [1, 'id', 'indonesia', 'text', 'Kebakaran hutan kembali terjadi di Indonesia', 'Laporan tentang konservasi hutan', 'Haze spreading'],
+    [2, 'ms', 'malaysia', 'text', 'Pembangkang Malaysia rancang perhimpunan di Kuala Lumpur', 'Artikel tentang koalisi politik', 'Demonstrasi di KL'],
+    [3, 'th', 'thailand', 'text', 'กฎเกณฑ์ความปลอดภัยเรือเฟอร์รีใหม่มีผลบังคับใช้', 'เรื่องราวเกี่ยวกับเรือเฟอร์รี', 'กฎปลอดภัย'],
+    [4, 'vi', 'vietnam', 'text', 'Quy định an toàn phà mới có hiệu lực', 'Về an toàn phà', 'Quy định an toàn'],
+    [5, 'my', 'myanmar', 'text', 'ကုသမားလို့ရလက်လည်သစ်', '关于 NLD', 'Article about NLD'],
+    [6, 'km', 'cambodia', 'text', 'ពន្លឺការសិក្សិកម្មន័ករាន់', 'អនុញ្ញាតនេះកំណត់នេះកំណត់នេះ', 'សិក្សិកម្ម'],
+    [7, 'br', 'brunei', 'text', 'Kebakaran hutan di Brunei', 'Artikel tentang hutan Brunei', 'Kebakaran hutan'],
+    [8, 'rki', 'east-timor', 'text', 'Hari Timor Timur', 'Tentang kemerdekaan Timor Leste', 'Hari kemerdekaan'],
+    [9, 'lo', 'laos', 'text', 'ການສະແດງການພາກຕົກລັດ', 'ການສະແດງການພາກຕົກລັດ', 'ການສະແດງ'],
+    [10, 'en', 'united_states', 'text', 'ASEAN Forest Report', 'Report on ASEAN forest conservation', 'Forest conservation'],
+  ];
+  for (const p of seededPosts) {
+    initPostsStmt.run(p[0], p[1], p[2], p[3], p[4], p[5], p[6]);
+  }
 }
 
 export function getPosts(limit = 50): Post[] {
