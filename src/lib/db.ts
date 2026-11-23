@@ -2,6 +2,7 @@ import Database from "better-sqlite3";
 import path from "path";
 import fs from "fs";
 import type { Comment, Post, Suggestion, User } from "./types";
+import { FEED_TRANSLATIONS } from "./feedTranslations";
 
 const DB_PATH = path.join(process.cwd(), "data", "sea_blings.db");
 
@@ -81,6 +82,21 @@ export function getDb(): Database.Database {
     const profileCols = db.prepare("PRAGMA table_info(profiles)").all() as Array<{ name: string }>;
     if (!profileCols.some((c) => c.name === "avatar")) {
       db.exec("ALTER TABLE profiles ADD COLUMN avatar TEXT");
+    }
+    // Migration: authored multilingual headlines live on the post itself.
+    const postCols = db.prepare("PRAGMA table_info(posts)").all() as Array<{ name: string }>;
+    if (!postCols.some((c) => c.name === "translations")) {
+      db.exec("ALTER TABLE posts ADD COLUMN translations TEXT");
+    }
+    // Seed only posts that have no translations yet; never overwrite edits.
+    const rows = db.prepare("SELECT id, translations FROM posts").all() as Array<{ id: number; translations: string | null }>;
+    const setTranslations = db.prepare(
+      "UPDATE posts SET translations = ? WHERE id = ? AND (translations IS NULL OR translations = '')",
+    );
+    for (const row of rows) {
+      const authored = FEED_TRANSLATIONS[row.id];
+      if (row.translations || !authored) continue;
+      setTranslations.run(JSON.stringify(authored), row.id);
     }
   }
   return db;

@@ -1,4 +1,9 @@
 // Shared types for SEAblings Word (southeastasiaanthony — ASEAN News Feed App)
+export interface PostTranslation {
+  title: string;
+  summary: string;
+}
+
 export interface Post {
   id: number;
   language_code: string;
@@ -9,6 +14,9 @@ export interface Post {
   media_url: string | null;
   summary: string | null;
   created_at: string;
+  // JSON-encoded authored translations, keyed by language code.
+  translations?: string | Record<string, PostTranslation> | null;
+  originalLanguage?: string;
 }
 
 export interface User {
